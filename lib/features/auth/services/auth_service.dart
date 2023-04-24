@@ -5,12 +5,12 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../../home/screens/home_screen.dart';
 import '../../../models/user.dart';
 import '../../../constants/global_variables.dart';
 import '../../../constants/error_handling.dart';
 import '../../../constants/utils.dart';
 import '../../../providers/user_provider.dart';
+import '../../../common/widgets/bottom_bar.dart';
 
 class AuthService {
   // sign up user
@@ -80,7 +80,7 @@ class AuthService {
           await prefs.setString('x-auth-token', jsonDecode(res.body)["token"]);
           Navigator.pushNamedAndRemoveUntil(
             context,
-            HomeScreen.routeName,
+            BottomBar.routeName,
             (route) => false,
           );
         },

@@ -33,7 +33,7 @@ class _AuthScreenState extends State<AuthScreen> {
     super.dispose();
     _emailController.dispose();
     _passwordController.dispose();
-    _emailController.dispose();
+    _nameController.dispose();
   }
 
   void signUpUser() {
