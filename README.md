@@ -4,12 +4,12 @@ This project is a full-stack app. Creating an Amazon clone using Flutter and Nod
 
 ## How to run this app
 
-### Step to run nodejs server with cmd
+### Steps to run nodejs server with cmd
 1. Open cmd at server folder (the folder contain package.json)
 2. Run ***npm install***
 3. Run ***npm run dev*** for development mode or run ***npm start*** for production mode
 
-### Step to run Flutter with vscode
+### Steps to run Flutter with vscode
 1. Open similator or connect to real mobile device
 2. Open Amazon Clone app with vscode (the folder contain the pubspec.yaml)
 3. Run ***flutter pub get*** to get dependent packages for Amazon Clone app
