@@ -1,16 +1,17 @@
-# amazon_clone_tutorial
+# Amazon Clone
 
-A new Flutter project.
+This project is a full-stack app. Creating an Amazon clone using Flutter and NodeJS.
 
-## Getting Started
+## How to run this app
 
-This project is a starting point for a Flutter application.
+### Step to run nodejs server with cmd
+1. Open cmd at server folder (the folder contain package.json)
+2. Run **npm install**
+3. Run **npm run dev** for development mode or run **npm start** for production mode
 
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+### Step to run Flutter with cmd
+1. Open similator or connect to real mobile device
+2. Open Amazon Clone app with vscode (the folder contain the pubspec.yaml)
+3. Run **flutter pub get** to get dependent packages for Amazon Clone app
+4. Change uri IP variable in global_variables.dart file with the IP of your computer (String uri = 'http://your_ip:3000')
+5. Choose Run / Run Without Debugging
