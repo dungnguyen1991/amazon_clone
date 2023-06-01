@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 
 // IMPORTS FROM OTHER FILES
 const authRouter = require('./routes/auth');
+const adminRouter = require('./routes/admin');
 
 //INIT
 const PORT = 3000;
@@ -16,6 +17,7 @@ app.use(express.json());
 
 // thêm dùng này là có thể chạy các lênh bên auth.js
 app.use(authRouter);
+app.use(adminRouter);
 
 // connections
 mongoose.connect(DB).then(() => {

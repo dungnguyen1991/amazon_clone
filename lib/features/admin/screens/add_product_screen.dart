@@ -8,6 +8,7 @@ import '../../../constants/global_variables.dart';
 import '../../../common/widgets/custom_textfield.dart';
 import '../../../common/widgets/custom_button.dart';
 import '../../../constants/utils.dart';
+import '../services/admin_services.dart';
 
 class AddProductScreen extends StatefulWidget {
   static const String routeName = "/add-product";
@@ -23,8 +24,12 @@ class _AddProductScreenState extends State<AddProductScreen> {
   final TextEditingController priceController = TextEditingController();
   final TextEditingController quantityController = TextEditingController();
 
+  final AdminServices adminServices = AdminServices();
+
   String category = "Mobiles";
   List<File> images = [];
+
+  final _addProductFormKey = GlobalKey<FormState>();
 
   @override
   void dispose() {
@@ -43,6 +48,20 @@ class _AddProductScreenState extends State<AddProductScreen> {
     'Books',
     'Fashion',
   ];
+
+  void sellProduct() {
+    if (_addProductFormKey.currentState!.validate() && images.isNotEmpty) {
+      adminServices.sellProduct(
+        context: context,
+        name: productNameController.text,
+        description: descriptionController.text,
+        price: double.parse(priceController.text),
+        quantity: int.parse(quantityController.text),
+        category: category,
+        images: images,
+      );
+    }
+  }
 
   void selectImages() async {
     var res = await pickImages();
@@ -72,6 +91,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
       ),
       body: SingleChildScrollView(
         child: Form(
+          key: _addProductFormKey,
           child: Padding(
             padding: const EdgeInsets.symmetric(
               horizontal: 10,
@@ -190,7 +210,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
                 ),
                 CustomButton(
                   text: "Sell",
-                  onTap: () {},
+                  onTap: sellProduct,
                 )
               ],
             ),
