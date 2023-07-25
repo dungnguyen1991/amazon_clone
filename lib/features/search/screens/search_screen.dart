@@ -1,21 +1,44 @@
+import 'package:amazon_clone_tutorial/common/widgets/loader.dart';
 import 'package:flutter/material.dart';
 
-import '../widgets/address_box.dart';
-import '../widgets/top_categories.dart';
-import '../widgets/carousel_image.dart';
-import '../widgets/deal_of_day.dart';
+import '../../../models/product.dart';
 import '../../../constants/global_variables.dart';
-import '../../search/screens/search_screen.dart';
+import '../services/search_services.dart';
+import '../widgets/searched_product.dart';
+import '../../home/widgets/address_box.dart';
 
-class HomeScreen extends StatefulWidget {
-  static const String routeName = '/home';
-  const HomeScreen({super.key});
+class SearchScreen extends StatefulWidget {
+  static const String routeName = '/search-screen';
+  final String searchQuery;
+
+  const SearchScreen({
+    super.key,
+    required this.searchQuery,
+  });
 
   @override
-  State<HomeScreen> createState() => _HomeScreenState();
+  State<SearchScreen> createState() => _SearchScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class _SearchScreenState extends State<SearchScreen> {
+  List<Product>? products;
+  final SearchServices searchServices = SearchServices();
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    fetchSearchedProduct();
+  }
+
+  fetchSearchedProduct() async {
+    products = await searchServices.fetchSearchedProducts(
+      context: context,
+      searchQuery: widget.searchQuery,
+    );
+    setState(() {});
+  }
+
   void navigateToSearchScreen(String query) {
     Navigator.pushNamed(context, SearchScreen.routeName, arguments: query);
   }
@@ -105,22 +128,26 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ),
       ),
-      body: SingleChildScrollView(
-        child: Column(
-          children: const [
-            AddressBox(),
-            SizedBox(
-              height: 10,
+      body: products == null
+          ? const Loader()
+          : Column(
+              children: [
+                const AddressBox(),
+                SizedBox(
+                  height: 10,
+                ),
+                Expanded(
+                  child: ListView.builder(
+                    itemCount: products!.length,
+                    itemBuilder: (context, index) {
+                      return SearchedProduct(
+                        product: products![index],
+                      );
+                    },
+                  ),
+                )
+              ],
             ),
-            TopCategories(),
-            SizedBox(
-              height: 10,
-            ),
-            CarouselImage(),
-            DealOfDay()
-          ],
-        ),
-      ),
     );
   }
 }
