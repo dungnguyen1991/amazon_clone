@@ -6,6 +6,7 @@ import '../../../constants/global_variables.dart';
 import '../services/search_services.dart';
 import '../widgets/searched_product.dart';
 import '../../home/widgets/address_box.dart';
+import '../../product_details/screens/product_details_screen.dart';
 
 class SearchScreen extends StatefulWidget {
   static const String routeName = '/search-screen';
@@ -140,8 +141,17 @@ class _SearchScreenState extends State<SearchScreen> {
                   child: ListView.builder(
                     itemCount: products!.length,
                     itemBuilder: (context, index) {
-                      return SearchedProduct(
-                        product: products![index],
+                      return GestureDetector(
+                        onTap: () {
+                          Navigator.pushNamed(
+                            context,
+                            ProductDetailScreen.routeName,
+                            arguments: products![index],
+                          );
+                        },
+                        child: SearchedProduct(
+                          product: products![index],
+                        ),
                       );
                     },
                   ),
